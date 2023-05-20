@@ -1,7 +1,19 @@
 import Head from 'next/head'
-import { HomeStyle } from '@/modules/home/style'
+import { HomeStyle, StyledCard } from '@/modules/home/style'
+import { Button, Card, Col, Empty, Form, Input, Row, Skeleton } from 'antd'
+import { alias } from '@/modules/home/const'
+import { useGetSessionQuery } from '@/modules/home/endpoint'
 
 export default function Home() {
+  const [form] = Form.useForm()
+  const { data: rsData = { data: [] }, isLoading } = useGetSessionQuery()
+
+  console.log(rsData)
+
+  const hdFinish = (values: { [key: string]: any }) => {
+    console.log({ values })
+  }
+
   return (
     <>
       <Head>
@@ -12,7 +24,51 @@ export default function Home() {
       </Head>
 
       <HomeStyle>
-        <h1>this is the template page</h1>
+        <div className='content'>
+          <Card>
+            <Form
+              layout='inline'
+              form={form}
+              initialValues={{ layout: 'inline' }}
+              onFinish={hdFinish}
+            >
+              <Form.Item label='Short Title' name={alias.title}>
+                <Input placeholder='Short Title' />
+              </Form.Item>
+
+              <Form.Item label='Status' name={alias.status}>
+                <Input placeholder='Status' />
+              </Form.Item>
+
+              <Form.Item>
+                <Button onClick={() => form.submit()} type='primary'>
+                  Search
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+
+          {isLoading && (
+            <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
+              {Array.from(Array(8).keys()).map((card: any, i: number) => (
+                <Col span={6} key={i}>
+                  <StyledCard>
+                    <div className='img-place'></div>
+                    <Skeleton active />
+                  </StyledCard>
+                </Col>
+              ))}
+            </Row>
+          )}
+
+          {!isLoading && rsData.data?.length !== 0 && (
+            <Card style={{ marginTop: 20 }}>
+              <Row justify='center' align='middle' style={{ height: 300 }}>
+                <Empty />
+              </Row>
+            </Card>
+          )}
+        </div>
       </HomeStyle>
     </>
   )

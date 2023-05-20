@@ -3,11 +3,9 @@ import { createWrapper } from 'next-redux-wrapper'
 import { api } from '@/common/redux/api'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
-import auth from '@/common/redux/auth/slice'
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
-  auth: auth.reducer,
 })
 
 const makeStore = () => {
