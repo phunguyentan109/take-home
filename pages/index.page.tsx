@@ -8,15 +8,15 @@ import {
   titleOptions,
 } from '@/modules/home/const'
 import CardSkeleton from '@/modules/home/components/CardSkeleton'
-import { ProgramApiType } from '@/common/global'
-import ProgramCard from '@/modules/home/components/ProgramCard'
+import { SessionApiType } from '@/common/global'
+import SessionCard from '@/modules/home/components/SessionCard'
 import { useEffect } from 'react'
-import { useLazyGetProgramQuery } from '@/modules/home/endpoint'
+import { useLazyGetSessionQuery } from '@/modules/home/endpoint'
 
 export default function Home() {
   const [form] = Form.useForm()
   const [trigger, { data: rsData = { data: [] }, isFetching }] =
-    useLazyGetProgramQuery()
+    useLazyGetSessionQuery()
 
   const hdFinish = (values: { [key: string]: string }) => {
     trigger({
@@ -97,9 +97,9 @@ export default function Home() {
 
           {!isFetching && (rsData.data || [])?.length > 0 && (
             <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
-              {(rsData.data || []).map((pro: ProgramApiType) => (
-                <Col span={6} key={pro.id + pro.start_date + pro.end_date}>
-                  <ProgramCard {...pro} />
+              {(rsData.data || []).map((ses: SessionApiType) => (
+                <Col span={6} key={ses.id + ses.start_date + ses.end_date}>
+                  <SessionCard {...ses} />
                 </Col>
               ))}
             </Row>

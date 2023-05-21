@@ -28,7 +28,7 @@ export const StyledCard = styled(Card)`
   }
 `
 
-export const StyledProgramCard = styled(Card)`
+export const StyledSessionCard = styled(Card)`
   width: 100%;
 
   .ant-card-body {

@@ -5,7 +5,7 @@ export type ResponseType<DataType> = {
   error?: string
 }
 
-type ProgramApiType = {
+type SessionApiType = {
   id: string
   short_title: string
   display_title: string

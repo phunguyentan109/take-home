@@ -17,7 +17,7 @@ export type SessionType = {
   program: SessionProgramType[]
 }
 
-export type TransformProgramType = {
+export type TransformSessionType = {
   id: string
   status: string
   start_date: string

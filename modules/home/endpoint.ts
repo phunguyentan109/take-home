@@ -1,11 +1,11 @@
 import { api } from '@/common/redux/api'
-import { ProgramApiType, ResponseType } from '@/common/global'
+import { SessionApiType, ResponseType } from '@/common/global'
 import * as querystring from 'querystring'
 
 const homeApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getProgram: builder.query<
-      ResponseType<ProgramApiType[]>,
+    getSession: builder.query<
+      ResponseType<SessionApiType[]>,
       { [key: string]: string }
     >({
       query: (param) => `/sessions?${querystring.stringify(param)}`,
@@ -14,4 +14,4 @@ const homeApi = api.injectEndpoints({
   overrideExisting: true,
 })
 
-export const { useLazyGetProgramQuery } = homeApi
+export const { useLazyGetSessionQuery } = homeApi
