@@ -42,4 +42,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 #### Helpers
 
 - Plop.js is applied to generate code directories/files based on templates to speed up the process of preparing folders/files and writing repetitive code. Moreover, using generated folders/files helps unify and preserve project structure.
-- Typescript is written on both Frontend and Backend to make the code flow more readable and enhance the readability.
+- Typescript is written on both Frontend and Backend to make the code flow more readable and enhance the reliability.
