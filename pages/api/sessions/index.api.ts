@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSessionsController } from '@/modules/api/sessions/sessions.controller'
-import { ResponseType, SessionApiType } from '@/common/global'
+import { ResponseType, ProgramApiType } from '@/common/global'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseType<SessionApiType>>
+  res: NextApiResponse<ResponseType<ProgramApiType>>
 ) {
   switch (req.method) {
     case 'GET':

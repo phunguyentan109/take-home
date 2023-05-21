@@ -27,3 +27,21 @@ export const StyledCard = styled(Card)`
     margin-bottom: 20px;
   }
 `
+
+export const StyledProgramCard = styled(Card)`
+  width: 100%;
+
+  .ant-card-body {
+    padding: 12px 12px 20px;
+  }
+
+  img {
+    width: 100% !important;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: gray;
+  }
+`

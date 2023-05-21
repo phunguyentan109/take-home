@@ -1,18 +1,33 @@
 import Head from 'next/head'
-import { HomeStyle, StyledCard } from '@/modules/home/style'
-import { Button, Card, Col, Empty, Form, Input, Row, Skeleton } from 'antd'
-import { alias } from '@/modules/home/const'
-import { useGetSessionQuery } from '@/modules/home/endpoint'
+import { HomeStyle } from '@/modules/home/style'
+import { Button, Card, Col, Empty, Form, Row, Select } from 'antd'
+import {
+  alias,
+  DEFAULT_VALUES,
+  statusOptions,
+  titleOptions,
+} from '@/modules/home/const'
+import CardSkeleton from '@/modules/home/components/CardSkeleton'
+import { ProgramApiType } from '@/common/global'
+import ProgramCard from '@/modules/home/components/ProgramCard'
+import { useEffect } from 'react'
+import { useLazyGetProgramQuery } from '@/modules/home/endpoint'
 
 export default function Home() {
   const [form] = Form.useForm()
-  const { data: rsData = { data: [] }, isLoading } = useGetSessionQuery()
+  const [trigger, { data: rsData = { data: [] }, isFetching }] =
+    useLazyGetProgramQuery()
 
-  console.log(rsData)
-
-  const hdFinish = (values: { [key: string]: any }) => {
-    console.log({ values })
+  const hdFinish = (values: { [key: string]: string }) => {
+    trigger({
+      ...values,
+      [alias.status]: (values[alias.status] || '').toLowerCase(),
+    })
   }
+
+  useEffect(() => {
+    trigger({ ...DEFAULT_VALUES })
+  }, [trigger])
 
   return (
     <>
@@ -33,40 +48,61 @@ export default function Home() {
               onFinish={hdFinish}
             >
               <Form.Item label='Short Title' name={alias.title}>
-                <Input placeholder='Short Title' />
+                <Select
+                  allowClear
+                  style={{ width: 150 }}
+                  options={titleOptions}
+                  placeholder='Short Title'
+                />
               </Form.Item>
 
               <Form.Item label='Status' name={alias.status}>
-                <Input placeholder='Status' />
+                <Select
+                  allowClear
+                  style={{ width: 150 }}
+                  options={statusOptions}
+                  placeholder='Status'
+                />
               </Form.Item>
 
               <Form.Item>
-                <Button onClick={() => form.submit()} type='primary'>
+                <Button
+                  loading={isFetching}
+                  onClick={() => form.submit()}
+                  type='primary'
+                >
                   Search
                 </Button>
               </Form.Item>
             </Form>
           </Card>
 
-          {isLoading && (
+          {isFetching && (
             <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
               {Array.from(Array(8).keys()).map((card: any, i: number) => (
                 <Col span={6} key={i}>
-                  <StyledCard>
-                    <div className='img-place'></div>
-                    <Skeleton active />
-                  </StyledCard>
+                  <CardSkeleton />
                 </Col>
               ))}
             </Row>
           )}
 
-          {!isLoading && rsData.data?.length !== 0 && (
+          {!isFetching && rsData.data?.length === 0 && (
             <Card style={{ marginTop: 20 }}>
               <Row justify='center' align='middle' style={{ height: 300 }}>
                 <Empty />
               </Row>
             </Card>
+          )}
+
+          {!isFetching && (rsData.data || [])?.length > 0 && (
+            <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
+              {(rsData.data || []).map((pro: ProgramApiType) => (
+                <Col span={6} key={pro.id + pro.start_date + pro.end_date}>
+                  <ProgramCard {...pro} />
+                </Col>
+              ))}
+            </Row>
           )}
         </div>
       </HomeStyle>

@@ -5,10 +5,12 @@ export type ResponseType<DataType> = {
   error?: string
 }
 
-type SessionApiType = {
+type ProgramApiType = {
+  id: string
   short_title: string
   display_title: string
   status: string
   start_date: string
+  thumbnail_img_url: string
   end_date: string
-}[]
+}
