@@ -28,8 +28,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Description
 #### Front-end
 
-- Nextjs is used with Redux & Redux Toolkit for easily managing data inside redux storage and scaling to larger scale in the future 
-- Redux Toolkit Query is applied to manage API and simplify data fetching process, this helps shortening the time for development while still providing reliability and customizable when needed. Besides, code-splitting api endpoints is also applied to trim down initial bundle size.
+- **Next.js** is used with **Redux** & **Redux Toolkit** for easily managing data inside redux storage and scaling to larger scale in the future 
+- **Redux Toolkit Query** is applied to manage API and simplify data fetching process, this helps shortening the time for development while still providing reliability and customizable when needed. Besides, code-splitting api endpoints is also applied to trim down initial bundle size.
+- **AntD** is used for building the UI, it contains a large set of components for multiple usage purposes. Besides, it comes with its own form handlers (this form can also be used with custom form item) and icons, using this UI library will really speed up the process of creating a complete and interactive UI
+- **Compiled** is used for styling component, this is a zero-runtime css-in-js library which have css-in-js blocks built into styles ahead of time, so it totally avoids runtime performance issues
 
 #### Back-end
 
@@ -41,5 +43,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 #### Helpers
 
-- Plop.js is applied to generate code directories/files based on templates to speed up the process of preparing folders/files and writing repetitive code. Moreover, using generated folders/files helps unify and preserve project structure.
-- Typescript is written on both Frontend and Backend to make the code flow more readable and enhance the reliability.
+- **Plop.js** is applied to generate code directories/files based on templates to speed up the process of preparing folders/files and writing repetitive code. Moreover, using generated folders/files helps unify and preserve project structure.
+- **Typescript** is written on both Frontend and Backend to make the code flow more readable and enhance the reliability.
